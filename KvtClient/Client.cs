@@ -44,7 +44,7 @@ namespace KvtClient
 
         static async void CallAPIAsyncUsingPassword()
         {
-            var discoveryClient = new DiscoveryClient("http://localhost:5000");
+            var discoveryClient = new DiscoveryClient("https://kvt-identityserver.azurewebsites.net/");
             var disco = await discoveryClient.GetAsync();
             // request token
             var tokenClient = new TokenClient(disco.TokenEndpoint, "winclient", "secret");
@@ -61,7 +61,7 @@ namespace KvtClient
             var client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("http://localhost:5001/identity");
+            var response = await client.GetAsync("http://kvtwebapi20180202111933.azurewebsites.net/identity");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
